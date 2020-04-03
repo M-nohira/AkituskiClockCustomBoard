@@ -1,0 +1,2 @@
+# AkituskiClockCustomBoard
+秋月電子の時計キットのカスタマイズボードです
