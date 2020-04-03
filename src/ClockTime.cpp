@@ -48,7 +48,6 @@ void ClockTime::SetTimeFromNTP(uint64_t timestamp)
     minute = ModTime(stamp_sec,60);
     second = stamp_sec;
 
-    SetTimeToRTC();
 }
 
 int ClockTime::ModTime(uint32_t& time,uint32_t modulus)
