@@ -32,6 +32,6 @@ private:
 public:
     void SendPacket(IPAddress addr, int port, NtpPacket packet);
     NtpPacket RecievePacket();
-    NTP();
+    NTP(int localPort);
     ~NTP();
 };

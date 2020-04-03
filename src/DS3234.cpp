@@ -5,6 +5,12 @@ DS3234::DS3234()
     DS3234Setting = SPISettings(SPI_CLK,MSBFIRST,SPI_MODE0);
     pinMode(SS_pin,OUTPUT);
     hspi = SPIClass(HSPI);
+
+    pinMode(SS_pin,OUTPUT);
+    pinMode(14,INPUT_PULLUP);
+    pinMode(13,OUTPUT);
+    pinMode(12,OUTPUT);
+
     hspi.begin(12, 13, 14, 15);
 }
 
@@ -29,7 +35,7 @@ uint8_t DS3234::ReadDataBySPI(uint8_t address)
     return result;
 }
 
-int DS3234::SetDateTime(int year, int month, int day, int hour, int min, int sec)
+void DS3234::SetDateTime(int year, int month, int day, int hour, int min, int sec)
 {
     //                 秒,  分,  時間,曜日,日,  月,    年
     int TimeDate[7] = {sec, min, hour, 0, day, month, year};
