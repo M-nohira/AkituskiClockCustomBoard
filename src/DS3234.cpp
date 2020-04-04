@@ -2,7 +2,7 @@
 
 DS3234::DS3234()
 {
-    DS3234Setting = SPISettings(SPI_CLK,MSBFIRST,SPI_MODE0);
+    DS3234Setting = SPISettings(SPI_CLK,MSBFIRST,SPI_MODE1);
     pinMode(SS_pin,OUTPUT);
     hspi = SPIClass(HSPI);
 
@@ -29,7 +29,7 @@ uint8_t DS3234::ReadDataBySPI(uint8_t address)
     hspi.beginTransaction(DS3234Setting);
     digitalWrite(SS_pin, LOW);
     hspi.transfer(address);
-    uint8_t result = SPI.transfer(0x00);
+    uint8_t result = hspi.transfer(0x00);
     digitalWrite(SS_pin, HIGH);
     hspi.endTransaction();
     return result;

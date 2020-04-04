@@ -28,6 +28,7 @@ class NTP
 private:
     
     WiFiUDP udp;
+    
 
 public:
     void SendPacket(IPAddress addr, int port, NtpPacket packet);

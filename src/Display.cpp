@@ -1,8 +1,10 @@
 #include "../include/Display.h"
 
-
 Display::Display(/* args */)
 {
+    pinMode(SER, OUTPUT);
+    pinMode(SRCLK, OUTPUT);
+    pinMode(RCLK, OUTPUT);
 }
 Display::~Display()
 {
@@ -23,21 +25,21 @@ void Display::SetSchematic(int index, byte segCode)
 
 void Display::SendPacket(uint16_t packet)
 {
+    //Serial.println(packet);
+    shiftOut(SER, SRCLK, LSBFIRST, packet ); //segment送信
     shiftOut(SER, SRCLK, MSBFIRST, packet >> 8);
-    shiftOut(SER, SRCLK, MSBFIRST, packet);
 }
 
 void Display::ApplyDisplay()
 {
     for (int cnt = 0; cnt <= 8; cnt++)
-    {
-        uint16_t packet = (0x01 << (cnt + 8)) + dateSchematic[cnt];
+    {        uint16_t packet = (0x01 << (cnt + 8)) + dateSchematic[cnt];
         SendPacket(packet);
 
         digitalWrite(RCLK, 1);
-        delay(1);
+        //delayMicroseconds(100);
         digitalWrite(RCLK, 0);
-        delay(1);
+        delayMicroseconds(100);
         digitalWrite(RCLK, 1);
     }
 }
